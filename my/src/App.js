@@ -18,7 +18,7 @@ function Home() {
         className="w-40 h-40 rounded-full object-cover border-4 border-blue-400 mb-6 relative z-10 shadow-lg shadow-blue-500/50 animate-fadeUp delay-100"
       />
 
-      <h1 className="text-5xl font-bold text-blue-400 relative z-10 tracking-wide animate-fadeUp delay-200">
+      <h1 className="text-3xl md:text-5xl font-bold text-blue-400 relative z-10 tracking-wide animate-fadeUp delay-200">
         Mohsen Ghanbari
       </h1>
       <h2 className="text-xl text-purple-400 mt-3 relative z-10 animate-fadeUp delay-300">
@@ -48,14 +48,14 @@ function Contact() {
       <div className="absolute w-72 h-72 bg-purple-500/10 rounded-full blur-3xl bottom-20 left-20"></div>
 
       <div className="max-w-3xl mx-auto relative z-10 flex flex-col items-center">
-        <h1 className="text-4xl font-bold text-blue-400 mb-2 animate-fadeUp delay-100">
+        <h1 className="text-3xl md:text-4xl font-bold text-blue-400 mb-2 animate-fadeUp delay-100">
           Contact Me
         </h1>
         <p className="text-gray-500 mb-12 animate-fadeUp delay-200">
           Let's get in touch!
         </p>
 
-        <div className="flex gap-6">
+        <div className="flex flex-col sm:flex-row gap-6">
           <a
             href="https://linkedin.com/in/username"
             target="_blank"
@@ -79,12 +79,12 @@ function Contact() {
 }
 function About() {
   return (
-    <div className="min-h-screen bg-gray-950 text-white px-8 py-16 relative overflow-hidden">
+    <div className="min-h-screen bg-gray-950 text-white px-4 md:px-8 py-16 relative overflow-hidden">
       <div className="absolute w-96 h-96 bg-blue-500/10 rounded-full blur-3xl top-20 right-20"></div>
       <div className="absolute w-72 h-72 bg-purple-500/10 rounded-full blur-3xl bottom-20 left-20"></div>
 
       <div className="max-w-3xl mx-auto relative z-10">
-        <h1 className="text-4xl font-bold text-blue-400 mb-2 animate-fadeUp delay-100">
+        <h1 className="text-3xl md:text-4xl font-bold text-blue-400 mb-2 animate-fadeUp delay-100">
           About Me
         </h1>
         <p className="text-gray-500 mb-12 animate-fadeUp delay-200">
@@ -101,7 +101,7 @@ function About() {
         <h2 className="text-2xl font-bold text-purple-400 mb-6 animate-fadeUp delay-400">
           Skills
         </h2>
-        <div className="grid grid-cols-2 gap-4 mb-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-16">
           {[
             {
               name: "HTML / CSS",
@@ -184,7 +184,7 @@ function Projects() {
       <div className="absolute w-72 h-72 bg-blue-500/10 rounded-full blur-3xl bottom-20 right-20"></div>
 
       <div className="max-w-3xl mx-auto relative z-10">
-        <h1 className="text-4xl font-bold text-blue-400 mb-2 animate-fadeUp delay-100">
+        <h1 className="text-3xl md:text-4xl font-bold text-blue-400 mb-2 animate-fadeUp delay-100">
           Projects
         </h1>
         <p className="text-gray-500 mb-12 animate-fadeUp delay-200">
@@ -235,34 +235,36 @@ function Projects() {
 function App() {
   return (
     <BrowserRouter>
-      <nav className="bg-gray-950 border-b border-blue-500/30 flex justify-between items-center px-8 py-4">
-        <h1 className="text-xl font-bold text-blue-400 tracking-widest uppercase">
+      <nav className="bg-gray-950 border-b border-blue-500/30 flex justify-between items-center px-4 md:px-8 py-4">
+        <h1 className="text-lg md:text-xl font-bold text-blue-400 tracking-widest uppercase">
           MG
         </h1>
-        <div className="flex gap-8">
+        <div className="flex gap-3 md:gap-8 text-sm md:text-base">
           <Link
             to="/"
-            className="flex items-center gap-2 text-gray-400 hover:text-blue-400 transition tracking-wider"
+            className="flex items-center gap-1 md:gap-2 text-gray-400 hover:text-blue-400 transition"
           >
-            <HiHome size={18} /> Home
+            <HiHome size={16} /> <span className="hidden sm:block">Home</span>
           </Link>
           <Link
             to="/contact"
-            className="flex items-center gap-2 text-gray-400 hover:text-blue-400 transition tracking-wider"
+            className="flex items-center gap-1 md:gap-2 text-gray-400 hover:text-blue-400 transition"
           >
-            <HiMail size={18} /> Contact
+            <HiMail size={16} />{" "}
+            <span className="hidden sm:block">Contact</span>
           </Link>
           <Link
             to="/about"
-            className="flex items-center gap-2 text-gray-400 hover:text-blue-400 transition tracking-wider"
+            className="flex items-center gap-1 md:gap-2 text-gray-400 hover:text-blue-400 transition"
           >
-            <HiUser size={17} /> About
+            <HiUser size={16} /> <span className="hidden sm:block">About</span>
           </Link>
           <Link
             to="/projects"
-            className="flex items-center gap-2 text-gray-400 hover:text-blue-400 transition tracking-wider"
+            className="flex items-center gap-1 md:gap-2 text-gray-400 hover:text-blue-400 transition"
           >
-            <HiCode size={18} /> Projects
+            <HiCode size={16} />{" "}
+            <span className="hidden sm:block">Projects</span>
           </Link>
         </div>
       </nav>
