@@ -1,21 +1,21 @@
-// import photo from "./photo.jpg";
 import { FaLinkedin, FaXTwitter } from "react-icons/fa6";
 import { HiHome, HiMail, HiArrowRight, HiUser, HiCode } from "react-icons/hi";
-import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaGitAlt } from "react-icons/fa";
-import { SiTailwindcss } from "react-icons/si";
-import photo from "./notion-avatar-1781359933826.svg";
+import { FaHtml5, FaJs, FaReact, FaGitAlt } from "react-icons/fa";
+// import photo from "./avatar.svg";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { SiTailwindcss, SiNextdotjs, SiTypescript } from "react-icons/si";
 
 function Home() {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-950 text-white relative overflow-hidden">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-950 text-white  relative overflow-hidden">
       <div className="absolute w-96 h-96 bg-blue-500/10 rounded-full blur-3xl top-20"></div>
       <div className="absolute w-72 h-72 bg-purple-500/10 rounded-full blur-3xl bottom-20"></div>
 
       <img
-        src={photo}
+        src="/avatar.svg"
         alt="Mohsen Ghanbari"
-        className="w-40 h-40 rounded-full object-cover border-4 border-blue-400 mb-6 relative z-10 shadow-lg shadow-blue-500/50 animate-fadeUp delay-100"
+        className="w-40 h-40 rounded-full mb-6 relative z-10 neon-border"
+        style={{ background: "#1e3a5f" }}
       />
 
       <h1 className="text-3xl md:text-5xl font-bold text-blue-400 relative z-10 tracking-wide animate-fadeUp delay-200">
@@ -29,6 +29,50 @@ function Home() {
         technologies. Currently mastering React and building real-world
         projects.
       </p>
+      <div className="ticker-wrapper w-full overflow-hidden mt-12 relative z-10 py-6 animate-fadeUp delay-500">
+        <div className="animate-scroll">
+          {[...Array(4)].map((_, repeatIndex) => (
+            <div key={repeatIndex} className="flex gap-20 shrink-0">
+              {[
+                {
+                  icon: <FaReact size={64} className="text-cyan-400" />,
+                  name: "React",
+                },
+                {
+                  icon: <SiNextdotjs size={64} className="text-white" />,
+                  name: "Next.js",
+                },
+                {
+                  icon: <FaJs size={64} className="text-yellow-400" />,
+                  name: "JavaScript",
+                },
+                {
+                  icon: <SiTypescript size={64} className="text-blue-500" />,
+                  name: "TypeScript",
+                },
+                {
+                  icon: <SiTailwindcss size={64} className="text-teal-400" />,
+                  name: "Tailwind",
+                },
+                {
+                  icon: <FaGitAlt size={64} className="text-orange-500" />,
+                  name: "Git",
+                },
+              ].map((skill, index) => (
+                <div
+                  key={index}
+                  className="flex flex-col items-center gap-2 text-gray-400 opacity-50 hover:opacity-100 hover:[animation-play-state:paused] transition-all duration-300 px-6 cursor-pointer group"
+                >
+                  <div className="group-hover:scale-110 transition-transform duration-300">
+                    {skill.icon}
+                  </div>
+                  <span className="text-sm tracking-wider">{skill.name}</span>
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
+      </div>
       <div className="flex gap-4 mt-8 relative z-10">
         <a
           href="/contact"
@@ -57,7 +101,7 @@ function Contact() {
 
         <div className="flex flex-col sm:flex-row gap-6">
           <a
-            href="https://linkedin.com/in/username"
+            href="https://linkedin.com/in/mohsenghanbarii"
             target="_blank"
             rel="noreferrer"
             className="flex items-center gap-2 bg-blue-600 px-6 py-3 rounded-lg hover:bg-blue-800 transition"
@@ -65,7 +109,7 @@ function Contact() {
             <FaLinkedin size={20} /> LinkedIn
           </a>
           <a
-            href="https://x.com/username"
+            href="https://x.com/mohsenghanbarii"
             target="_blank"
             rel="noreferrer"
             className="flex items-center gap-2 bg-gray-900 border border-gray-700 px-6 py-3 rounded-lg hover:bg-gray-800 transition"
@@ -235,10 +279,18 @@ function Projects() {
 function App() {
   return (
     <BrowserRouter>
-      <nav className="bg-gray-950 border-b border-blue-500/30 flex justify-between items-center px-4 md:px-8 py-4">
-        <h1 className="text-lg md:text-xl font-bold text-blue-400 tracking-widest uppercase">
-          MG
-        </h1>
+      <nav className="bg-gray-950 border-blue-500/30 border-b flex justify-between items-center px-4 md:px-8 py-4">
+        <div className="flex items-center gap-4">
+          <h1 className="text-lg md:text-xl font-bold text-blue-400 tracking-widest uppercase">
+            MG
+          </h1>
+          {/* <button
+            onClick={() => setIsDark(!isDark)}
+            className="text-gray-400 hover:text-blue-400 transition text-xl"
+          >
+            {isDark ? "☀️" : "🌙"}
+          </button> */}
+        </div>
         <div className="flex gap-3 md:gap-8 text-sm md:text-base">
           <Link
             to="/"
@@ -270,9 +322,9 @@ function App() {
       </nav>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/contact" element={<Contact />} />
         <Route path="/about" element={<About />} />
         <Route path="/projects" element={<Projects />} />
+        <Route path="/contact" element={<Contact />} />
       </Routes>
     </BrowserRouter>
   );

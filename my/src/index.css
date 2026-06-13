@@ -47,3 +47,70 @@ code {
   animation-delay: 0.4s;
   opacity: 0;
 }
+
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-scroll {
+  animation: scroll 20s linear infinite;
+  will-change: transform;
+  display: flex;
+  gap: 80px;
+}
+
+.ticker-wrapper:hover .animate-scroll {
+  animation-play-state: paused;
+}
+
+@keyframes rotateBorder {
+  0% { box-shadow: 0 0 15px 3px #a855f7, 0 0 30px 6px #7c3aed; }
+  50% { box-shadow: 0 0 20px 5px #3b82f6, 0 0 40px 10px #6366f1; }
+  100% { box-shadow: 0 0 15px 3px #a855f7, 0 0 30px 6px #7c3aed; }
+}
+
+.neon-border {
+  animation: fadeUp 0.8s ease forwards, rotateBorder 2s ease-in-out 0.9s infinite;
+  border-radius: 9999px;
+}
+
+.ticker-wrapper::before,
+.ticker-wrapper::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #a855f7, #3b82f6, #a855f7, transparent);
+  background-size: 200% 100%;
+  animation: borderGlow 3s linear infinite;
+  z-index: 20;
+}
+
+.ticker-wrapper::before {
+  top: 0;
+}
+
+.ticker-wrapper::after {
+  bottom: 0;
+}
+
+@keyframes borderGlow {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 200% 0%; }
+}
