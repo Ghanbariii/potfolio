@@ -414,7 +414,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <nav className="bg-gradient-to-r from-gray-950 via-gray-900 to-gray-950 border-b border-blue-500/20 flex justify-between items-center px-4 md:px-8 py-4 z-50 sticky top-0">
+      <nav className="relative bg-gradient-to-r from-gray-950 via-gray-900 to-gray-950 border-b border-blue-500/20 flex justify-between items-center px-4 md:px-8 py-4 z-50 sticky top-0">
         {" "}
         <div className="flex items-center gap-3 transition-all duration-300">
           <img
