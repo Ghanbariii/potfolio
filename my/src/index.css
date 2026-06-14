@@ -57,7 +57,6 @@ code {
   }
 }
 
-
 @keyframes scroll {
   0% {
     transform: translateX(0);
@@ -79,24 +78,45 @@ code {
 }
 
 @keyframes rotateBorder {
-  0% { box-shadow: 0 0 15px 3px #a855f7, 0 0 30px 6px #7c3aed; }
-  50% { box-shadow: 0 0 20px 5px #3b82f6, 0 0 40px 10px #6366f1; }
-  100% { box-shadow: 0 0 15px 3px #a855f7, 0 0 30px 6px #7c3aed; }
+  0% {
+    box-shadow:
+      0 0 15px 3px #a855f7,
+      0 0 30px 6px #7c3aed;
+  }
+  50% {
+    box-shadow:
+      0 0 20px 5px #3b82f6,
+      0 0 40px 10px #6366f1;
+  }
+  100% {
+    box-shadow:
+      0 0 15px 3px #a855f7,
+      0 0 30px 6px #7c3aed;
+  }
 }
 
 .neon-border {
-  animation: fadeUp 0.8s ease forwards, rotateBorder 2s ease-in-out 0.9s infinite;
+  animation:
+    fadeUp 0.8s ease forwards,
+    rotateBorder 2s ease-in-out 0.9s infinite;
   border-radius: 9999px;
 }
 
 .ticker-wrapper::before,
 .ticker-wrapper::after {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   right: 0;
   height: 2px;
-  background: linear-gradient(90deg, transparent, #a855f7, #3b82f6, #a855f7, transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #a855f7,
+    #3b82f6,
+    #a855f7,
+    transparent
+  );
   background-size: 200% 100%;
   animation: borderGlow 3s linear infinite;
   z-index: 20;
@@ -111,6 +131,56 @@ code {
 }
 
 @keyframes borderGlow {
-  0% { background-position: 0% 0%; }
-  100% { background-position: 200% 0%; }
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 200% 0%;
+  }
+}
+
+@keyframes progressFill {
+  from {
+    width: 0%;
+  }
+  to {
+    width: var(--progress-width);
+  }
+}
+
+.progress-bar {
+  animation: progressFill 1.5s ease forwards;
+}
+
+@keyframes neonMove {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 200% 0%;
+  }
+}
+
+.progress-bar {
+  animation:
+    progressFill 1.5s ease forwards,
+    neonMove 2s linear infinite;
+  background: linear-gradient(90deg, #3b82f6, #a855f7, #3b82f6, #a855f7);
+  background-size: 200% 100%;
+  box-shadow: 0 0 10px #a855f7;
+}
+
+@keyframes menuSlide {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.menu-animate {
+  animation: menuSlide 0.3s ease forwards;
 }

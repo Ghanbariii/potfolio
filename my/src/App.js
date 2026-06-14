@@ -1,9 +1,18 @@
 import { FaLinkedin, FaXTwitter } from "react-icons/fa6";
-import { HiHome, HiMail, HiArrowRight, HiUser, HiCode } from "react-icons/hi";
+import {
+  HiHome,
+  HiMail,
+  HiArrowRight,
+  HiUser,
+  HiCode,
+  HiMenu,
+  HiX,
+} from "react-icons/hi";
 import { FaHtml5, FaJs, FaReact, FaGitAlt } from "react-icons/fa";
 // import photo from "./avatar.svg";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import { SiTailwindcss, SiNextdotjs, SiTypescript } from "react-icons/si";
+import { useState } from "react";
 
 function Home() {
   return (
@@ -145,35 +154,52 @@ function About() {
         <h2 className="text-2xl font-bold text-purple-400 mb-6 animate-fadeUp delay-400">
           Skills
         </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-16">
+        <h2 className="text-2xl font-bold text-purple-400 mb-6 animate-fadeUp delay-400">
+          Skills
+        </h2>
+        <div className="flex flex-col gap-6 mb-16">
           {[
-            {
-              name: "HTML / CSS",
-              icon: <FaHtml5 size={20} className="text-orange-400" />,
-            },
             {
               name: "JavaScript",
               icon: <FaJs size={20} className="text-yellow-400" />,
+              percent: 70,
             },
             {
               name: "React",
-              icon: <FaReact size={20} className="text-blue-400" />,
+              icon: <FaReact size={20} className="text-cyan-400" />,
+              percent: 60,
             },
             {
               name: "Tailwind CSS",
-              icon: <SiTailwindcss size={20} className="text-cyan-400" />,
+              icon: <SiTailwindcss size={20} className="text-teal-400" />,
+              percent: 75,
             },
             {
               name: "Git",
               icon: <FaGitAlt size={20} className="text-orange-500" />,
+              percent: 60,
             },
           ].map((skill) => (
-            <div
-              key={skill.name}
-              className="flex items-center gap-3 bg-blue-500/10 border border-blue-500/30 rounded-lg px-4 py-3 text-blue-300 hover:border-blue-400 transition"
-            >
-              {skill.icon}
-              {skill.name}
+            <div key={skill.name}>
+              <div className="flex items-center gap-2 mb-2">
+                {skill.icon}
+                <span className="text-blue-300 text-sm tracking-wider">
+                  {skill.name}
+                </span>
+                <span className="ml-auto text-purple-400 text-sm">
+                  {skill.percent}%
+                </span>
+              </div>
+              <div className="w-full bg-gray-800 rounded-full h-2">
+                <div
+                  className="h-2 rounded-full progress-bar"
+                  style={{
+                    "--progress-width": `${skill.percent}%`,
+                    width: `${skill.percent}%`,
+                    boxShadow: "0 0 10px #a855f7",
+                  }}
+                ></div>
+              </div>
             </div>
           ))}
         </div>
@@ -277,48 +303,85 @@ function Projects() {
 }
 
 function App() {
+  const [menuOpen, setMenuOpen] = useState(false);
   return (
     <BrowserRouter>
-      <nav className="bg-gray-950 border-blue-500/30 border-b flex justify-between items-center px-4 md:px-8 py-4">
+      <nav className="bg-gray-950 border-b border-blue-500/30 flex justify-between items-center px-4 md:px-8 py-4 relative z-50">
         <div className="flex items-center gap-4">
           <h1 className="text-lg md:text-xl font-bold text-blue-400 tracking-widest uppercase">
             MG
           </h1>
-          {/* <button
-            onClick={() => setIsDark(!isDark)}
-            className="text-gray-400 hover:text-blue-400 transition text-xl"
-          >
-            {isDark ? "☀️" : "🌙"}
-          </button> */}
         </div>
-        <div className="flex gap-3 md:gap-8 text-sm md:text-base">
+
+        {/* همبرگری - فقط موبایل */}
+        <button
+          className="md:hidden text-gray-400 hover:text-blue-400 transition"
+          onClick={() => setMenuOpen(!menuOpen)}
+        >
+          {menuOpen ? <HiX size={24} /> : <HiMenu size={24} />}
+        </button>
+
+        {/* لینک‌ها - دسکتاپ */}
+        <div className="hidden md:flex gap-8 text-sm">
           <Link
             to="/"
-            className="flex items-center gap-1 md:gap-2 text-gray-400 hover:text-blue-400 transition"
+            className="flex items-center gap-2 text-gray-400 hover:text-blue-400 transition"
           >
-            <HiHome size={16} /> <span className="hidden sm:block">Home</span>
-          </Link>
-          <Link
-            to="/contact"
-            className="flex items-center gap-1 md:gap-2 text-gray-400 hover:text-blue-400 transition"
-          >
-            <HiMail size={16} />{" "}
-            <span className="hidden sm:block">Contact</span>
+            <HiHome size={16} /> Home
           </Link>
           <Link
             to="/about"
-            className="flex items-center gap-1 md:gap-2 text-gray-400 hover:text-blue-400 transition"
+            className="flex items-center gap-2 text-gray-400 hover:text-blue-400 transition"
           >
-            <HiUser size={16} /> <span className="hidden sm:block">About</span>
+            <HiUser size={16} /> About
           </Link>
           <Link
             to="/projects"
-            className="flex items-center gap-1 md:gap-2 text-gray-400 hover:text-blue-400 transition"
+            className="flex items-center gap-2 text-gray-400 hover:text-blue-400 transition"
           >
-            <HiCode size={16} />{" "}
-            <span className="hidden sm:block">Projects</span>
+            <HiCode size={16} /> Projects
+          </Link>
+          <Link
+            to="/contact"
+            className="flex items-center gap-2 text-gray-400 hover:text-blue-400 transition"
+          >
+            <HiMail size={16} /> Contact
           </Link>
         </div>
+
+        {/* منو موبایل */}
+        {menuOpen && (
+          <div className="menu-animate absolute top-full left-0 right-0 bg-gray-950 border-b border-blue-500/30 flex flex-col gap-4 px-8 py-6 md:hidden">
+            <Link
+              to="/"
+              onClick={() => setMenuOpen(false)}
+              className="flex items-center gap-2 text-gray-400 hover:text-blue-400 transition"
+            >
+              <HiHome size={16} /> Home
+            </Link>
+            <Link
+              to="/about"
+              onClick={() => setMenuOpen(false)}
+              className="flex items-center gap-2 text-gray-400 hover:text-blue-400 transition"
+            >
+              <HiUser size={16} /> About
+            </Link>
+            <Link
+              to="/projects"
+              onClick={() => setMenuOpen(false)}
+              className="flex items-center gap-2 text-gray-400 hover:text-blue-400 transition"
+            >
+              <HiCode size={16} /> Projects
+            </Link>
+            <Link
+              to="/contact"
+              onClick={() => setMenuOpen(false)}
+              className="flex items-center gap-2 text-gray-400 hover:text-blue-400 transition"
+            >
+              <HiMail size={16} /> Contact
+            </Link>
+          </div>
+        )}
       </nav>
       <Routes>
         <Route path="/" element={<Home />} />
