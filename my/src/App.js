@@ -14,7 +14,6 @@ import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import { SiTailwindcss, SiNextdotjs, SiTypescript } from "react-icons/si";
 import { useState, useEffect } from "react";
 import emailjs from "@emailjs/browser";
-import "aos/dist/aos.css";
 
 function Home() {
   return (
@@ -411,6 +410,25 @@ function Projects() {
 
 function App() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    setTimeout(() => setLoading(false), 2000);
+  }, []);
+if (loading) {
+  return (
+    <div className="fixed inset-0 bg-gray-950 flex flex-col items-center justify-center z-50">
+      <img
+        src="/avatar.svg"
+        alt="MG"
+        className="w-24 h-24 rounded-full neon-border animate-pulse"
+        style={{ background: "#1e3a5f" }}
+      />
+      <p className="text-blue-400 mt-6 text-xl font-bold tracking-widest neon-text">
+        &lt;/MG&gt;
+      </p>
+    </div>
+  );
+}
 
   return (
     <BrowserRouter>
