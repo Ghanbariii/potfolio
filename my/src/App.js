@@ -502,7 +502,7 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
-      <footer className="bg-gray-950 border-t border-blue-500/20 text-center py-6 text-gray-500 text-sm">
+      <footer className="bg-gray-950 border-t border-blue-500/20 text-center py-6 text-gray-500 text-xs md:text-sm">
         © 2025 Mohsen Ghanbari — Built with React & Tailwind
       </footer>
     </BrowserRouter>
