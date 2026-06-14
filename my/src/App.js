@@ -83,6 +83,37 @@ function Home() {
           ))}
         </div>
       </div>
+      <div className="w-full max-w-3xl mt-16 relative z-10 px-4">
+        <h2 className="text-2xl font-bold text-purple-400 mb-6 text-center">
+          Latest Posts
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {[
+            {
+              title: "My Journey into React",
+              date: "June 2025",
+              desc: "How I started learning React and what I've built so far.",
+            },
+            {
+              title: "Why I Chose Front-End",
+              date: "May 2025",
+              desc: "The story behind my passion for front-end development.",
+            },
+          ].map((post) => (
+            <div
+              key={post.title}
+              className="bg-blue-500/10 border border-blue-500/30 rounded-xl p-6 hover:border-blue-400 transition cursor-pointer"
+            >
+              <p className="text-gray-500 text-xs mb-2">{post.date}</p>
+              <h3 className="text-white font-bold mb-2">{post.title}</h3>
+              <p className="text-gray-400 text-sm">{post.desc}</p>
+              <p className="text-blue-400 text-sm mt-4 hover:text-blue-300">
+                Read More →
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
       <div className="flex gap-4 mt-8 relative z-10">
         <a
           href="/contact"
