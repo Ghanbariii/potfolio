@@ -295,15 +295,17 @@ function About() {
         </div>
 
         <h2 className="text-2xl font-bold text-purple-400 mb-6">Journey</h2>
-        <div className="fade-in-section flex flex-col gap-4">
+        <div className="flex flex-col gap-4">
           {[
             { year: "2024", text: "Started learning HTML & CSS" },
             { year: "2024", text: "Learned JavaScript fundamentals" },
             { year: "2025", text: "Started React & Tailwind" },
             { year: "2025", text: "Building real-world projects" },
           ].map((item) => (
-            <div key={item.text} className="flex gap-4 items-start">
-              <span className="text-blue-400 font-bold w-12">{item.year}</span>
+            <div key={item.text} className="flex items-center gap-4">
+              <span className="text-blue-400 font-bold w-12 shrink-0">
+                {item.year}
+              </span>
               <div className="flex-1 bg-blue-500/10 border border-blue-500/30 rounded-lg px-4 py-3 text-gray-300">
                 {item.text}
               </div>
@@ -418,7 +420,7 @@ function App() {
           <img
             src="/avatar.svg"
             alt="MG"
-            className="w-8 h-8 rounded-full neon-border"
+            className="w-6 h-6 md:w-8 md:h-8 rounded-full neon-border"
             style={{ background: "#1e3a5f" }}
           />
           <h1 className="text-lg font-bold text-blue-400 tracking-wider neon-text ">
