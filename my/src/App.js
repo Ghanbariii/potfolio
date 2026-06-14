@@ -25,6 +25,14 @@ import client from "./contentful";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 
 function Home() {
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    client
+      .getEntries({ content_type: "blogPost", limit: 2 })
+      .then((response) => setPosts(response.items))
+      .catch(console.error);
+  }, []);
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-950 text-white  relative overflow-hidden">
       <div className="absolute w-96 h-96 bg-blue-500/10 rounded-full blur-3xl top-20"></div>
@@ -92,33 +100,38 @@ function Home() {
           ))}
         </div>
       </div>
-      <div className="w-full max-w-3xl mt-16 relative z-10 px-4">
-        <h2 className="text-2xl font-bold text-purple-400 mb-6 text-center">
+      <div className="w-full max-w-3xl mt-16 relative z-10 px-4 flex flex-col items-center">
+        <h2 className="text-2xl font-bold text-purple-400 mb-6 text-center w-full">
           Latest Posts
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {[
-            {
-              title: "My Journey into React",
-              date: "June 2025",
-              desc: "How I started learning React and what I've built so far.",
-            },
-            {
-              title: "Why I Chose Front-End",
-              date: "May 2025",
-              desc: "The story behind my passion for front-end development.",
-            },
-          ].map((post) => (
+        <div
+          className={`w-full gap-6 ${posts.length === 1 ? "flex justify-center" : "grid grid-cols-1 md:grid-cols-2"}`}
+        >
+          {posts.map((post) => (
             <div
-              key={post.title}
-              className="bg-blue-500/10 border border-blue-500/30 rounded-xl p-6 hover:border-blue-400 transition cursor-pointer"
+              key={post.sys.id}
+              className="bg-blue-500/10 border border-blue-500/30 rounded-xl p-6 hover:border-blue-400 transition cursor-pointer max-w-sm w-full"
             >
-              <p className="text-gray-500 text-xs mb-2">{post.date}</p>
-              <h3 className="text-white font-bold mb-2">{post.title}</h3>
-              <p className="text-gray-400 text-sm">{post.desc}</p>
-              <p className="text-blue-400 text-sm mt-4 hover:text-blue-300">
-                Read More →
+              <p className="text-gray-500 text-xs mb-2">
+                {new Date(post.fields.publishedDate).toLocaleDateString(
+                  "en-US",
+                  {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  },
+                )}
               </p>
+              <h3 className="text-white font-bold mb-2">{post.fields.title}</h3>
+              <p className="text-gray-400 text-sm">{post.fields.excerpt}</p>
+              <Link
+                to={`/blog/${post.fields.slug}`}
+                className="text-blue-400 text-sm mt-4 hover:text-blue-300 block"
+              >
+                Read More →
+              </Link>
             </div>
           ))}
         </div>
