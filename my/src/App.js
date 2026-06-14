@@ -311,6 +311,15 @@ function About() {
             </div>
           ))}
         </div>
+        <div className="mt-10 flex justify-center">
+          <a
+            href="/resume.pdf"
+            download
+            className="flex items-center gap-2 bg-purple-500/20 border border-purple-500 text-purple-400 px-6 py-3 rounded-lg hover:bg-purple-500 hover:text-white transition font-bold"
+          >
+            Download Resume
+          </a>
+        </div>
       </div>
     </div>
   );
@@ -414,21 +423,21 @@ function App() {
   useEffect(() => {
     setTimeout(() => setLoading(false), 2000);
   }, []);
-if (loading) {
-  return (
-    <div className="fixed inset-0 bg-gray-950 flex flex-col items-center justify-center z-50">
-      <img
-        src="/avatar.svg"
-        alt="MG"
-        className="w-24 h-24 rounded-full neon-border animate-pulse"
-        style={{ background: "#1e3a5f" }}
-      />
-      <p className="text-blue-400 mt-6 text-xl font-bold tracking-widest neon-text">
-        &lt;/MG&gt;
-      </p>
-    </div>
-  );
-}
+  if (loading) {
+    return (
+      <div className="fixed inset-0 bg-gray-950 flex flex-col items-center justify-center z-50">
+        <img
+          src="/avatar.svg"
+          alt="MG"
+          className="w-24 h-24 rounded-full neon-border animate-pulse"
+          style={{ background: "#1e3a5f" }}
+        />
+        <p className="text-blue-400 mt-6 text-xl font-bold tracking-widest neon-text">
+          &lt;/MG&gt;
+        </p>
+      </div>
+    );
+  }
 
   return (
     <BrowserRouter>
