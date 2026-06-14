@@ -12,8 +12,10 @@ import { FaJs, FaReact, FaGitAlt } from "react-icons/fa";
 // import photo from "./avatar.svg";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import { SiTailwindcss, SiNextdotjs, SiTypescript } from "react-icons/si";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import emailjs from "@emailjs/browser";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 function Home() {
   return (
@@ -204,6 +206,19 @@ function Contact() {
   );
 }
 function About() {
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+        }
+      });
+    });
+
+    document.querySelectorAll(".fade-in-section").forEach((el) => {
+      observer.observe(el);
+    });
+  }, []);
   return (
     <div className="min-h-screen bg-gray-950 text-white px-4 md:px-8 py-16 relative overflow-hidden">
       <div className="absolute w-96 h-96 bg-blue-500/10 rounded-full blur-3xl top-20 right-20"></div>
@@ -227,7 +242,7 @@ function About() {
         <h2 className="text-2xl font-bold text-purple-400 mb-6 animate-fadeUp delay-400">
           Skills
         </h2>
-        <div className="flex flex-col gap-6 mb-16">
+        <div className="fade-in-section flex flex-col gap-6 mb-16">
           {[
             {
               name: "JavaScript",
@@ -275,7 +290,7 @@ function About() {
         </div>
 
         <h2 className="text-2xl font-bold text-purple-400 mb-6">Journey</h2>
-        <div className="flex flex-col gap-4">
+        <div className="fade-in-section flex flex-col gap-4">
           {[
             { year: "2024", text: "Started learning HTML & CSS" },
             { year: "2024", text: "Learned JavaScript fundamentals" },
@@ -389,6 +404,7 @@ function Projects() {
 
 function App() {
   const [menuOpen, setMenuOpen] = useState(false);
+
   return (
     <BrowserRouter>
       <nav className="bg-gradient-to-r from-gray-950 via-gray-900 to-gray-950 border-b border-blue-500/20 flex justify-between items-center px-4 md:px-8 py-4 z-50 sticky top-0">
@@ -477,11 +493,35 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/projects" element={<Projects />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
       <footer className="bg-gray-950 border-t border-blue-500/20 text-center py-6 text-gray-500 text-sm">
         © 2025 Mohsen Ghanbari — Built with React & Tailwind
       </footer>
     </BrowserRouter>
+  );
+}
+
+function NotFound() {
+  return (
+    <div className="min-h-screen bg-gray-950 text-white flex flex-col items-center justify-center relative overflow-hidden">
+      <div className="absolute w-96 h-96 bg-blue-500/10 rounded-full blur-3xl top-20"></div>
+      <div className="absolute w-72 h-72 bg-purple-500/10 rounded-full blur-3xl bottom-20"></div>
+
+      <h1 className="text-9xl font-bold text-blue-400 relative z-10">404</h1>
+      <p className="text-2xl text-purple-400 mt-4 relative z-10">
+        Page Not Found
+      </p>
+      <p className="text-gray-500 mt-2 relative z-10">
+        Looks like you got lost in the code!
+      </p>
+      <a
+        href="/"
+        className="mt-8 bg-blue-500/20 border border-blue-500 text-blue-400 px-6 py-3 rounded-lg hover:bg-blue-500 hover:text-white transition relative z-10"
+      >
+        Go Home
+      </a>
+    </div>
   );
 }
 
