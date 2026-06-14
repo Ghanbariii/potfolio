@@ -8,7 +8,7 @@ import {
   HiMenu,
   HiX,
 } from "react-icons/hi";
-import { FaHtml5, FaJs, FaReact, FaGitAlt } from "react-icons/fa";
+import { FaJs, FaReact, FaGitAlt } from "react-icons/fa";
 // import photo from "./avatar.svg";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import { SiTailwindcss, SiNextdotjs, SiTypescript } from "react-icons/si";
@@ -90,6 +90,9 @@ function Home() {
           Contact Me <HiArrowRight size={18} />
         </a>
       </div>
+      <p className="text-blue-400/50 text-sm mt-6 italic relative z-10 animate-fadeUp delay-400">
+        "Turning coffee into code since 2024."
+      </p>
     </div>
   );
 }
@@ -393,6 +396,9 @@ function App() {
         <Route path="/projects" element={<Projects />} />
         <Route path="/contact" element={<Contact />} />
       </Routes>
+      <footer className="bg-gray-950 border-t border-blue-500/20 text-center py-6 text-gray-500 text-sm">
+        © 2025 Mohsen Ghanbari — Built with React & Tailwind
+      </footer>
     </BrowserRouter>
   );
 }
