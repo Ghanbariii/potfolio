@@ -7,13 +7,22 @@ import {
   HiCode,
   HiMenu,
   HiX,
+  HiNewspaper,
 } from "react-icons/hi";
 import { FaJs, FaReact, FaGitAlt } from "react-icons/fa";
 // import photo from "./avatar.svg";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Link,
+  useParams,
+} from "react-router-dom";
 import { SiTailwindcss, SiNextdotjs, SiTypescript } from "react-icons/si";
 import { useState, useEffect } from "react";
 import emailjs from "@emailjs/browser";
+import client from "./contentful";
+import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 
 function Home() {
   return (
@@ -539,6 +548,12 @@ function App() {
           >
             <HiMail size={16} /> Contact
           </Link>
+          <Link
+            to="/blog"
+            className="flex items-center gap-2 text-gray-400 hover:text-blue-400 transition"
+          >
+            <HiNewspaper size={16} /> Blog
+          </Link>
         </div>
         {/* منو موبایل */}
         {menuOpen && (
@@ -580,6 +595,8 @@ function App() {
         <Route path="/projects" element={<Projects />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="*" element={<NotFound />} />
+        <Route path="/blog" element={<Blog />} />
+        <Route path="/blog/:slug" element={<BlogPost />} />
       </Routes>
       <footer className="bg-gray-950 border-t border-blue-500/20 text-center py-6 text-gray-500 text-xs md:text-sm">
         © 2025 Mohsen Ghanbari — Built with React & Tailwind
@@ -607,6 +624,124 @@ function NotFound() {
       >
         Go Home
       </a>
+    </div>
+  );
+}
+
+function Blog() {
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    client
+      .getEntries({ content_type: "blogPost" })
+      .then((response) => {
+        console.log("posts:", response.items);
+        setPosts(response.items);
+      })
+      .catch((err) => console.error("error:", err));
+  }, []);
+
+  return (
+    <div className="min-h-screen bg-gray-950 text-white px-8 py-16 relative overflow-hidden">
+      <div className="absolute w-96 h-96 bg-blue-500/10 rounded-full blur-3xl top-20 left-20"></div>
+      <div className="absolute w-72 h-72 bg-purple-500/10 rounded-full blur-3xl bottom-20 right-20"></div>
+
+      <div className="max-w-3xl mx-auto relative z-10">
+        <h1 className="text-3xl md:text-4xl font-bold text-blue-400 mb-2 animate-fadeUp delay-100">
+          Blog
+        </h1>
+        <p className="text-gray-500 mb-12 animate-fadeUp delay-200">
+          My thoughts and experiences
+        </p>
+
+        <div className="flex flex-col gap-6">
+          {posts.map((post) => (
+            <div
+              key={post.sys.id}
+              className="bg-blue-500/10 border border-blue-500/30 rounded-xl p-6 hover:border-blue-400 transition cursor-pointer animate-fadeUp"
+            >
+              <p className="text-gray-500 text-xs mb-2">
+                {new Date(post.fields.publishedDate).toLocaleDateString(
+                  "en-US",
+                  {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  },
+                )}
+              </p>
+              <h2 className="text-xl font-bold text-white mb-2">
+                {post.fields.title}
+              </h2>
+              <p className="text-gray-400 text-sm">{post.fields.excerpt}</p>
+              <Link
+                to={`/blog/${post.fields.slug}`}
+                className="text-blue-400 text-sm mt-4 hover:text-blue-300"
+              >
+                Read More →
+              </Link>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+function BlogPost() {
+  const { slug } = useParams();
+  const [post, setPost] = useState(null);
+
+  useEffect(() => {
+    client
+      .getEntries({
+        content_type: "blogPost",
+        "fields.slug": slug,
+      })
+      .then((response) => setPost(response.items[0]))
+      .catch(console.error);
+  }, [slug]);
+
+  if (!post)
+    return (
+      <div className="min-h-screen bg-gray-950 text-white flex items-center justify-center">
+        <p className="text-blue-400 text-xl">Loading...</p>
+      </div>
+    );
+
+  return (
+    <div className="min-h-screen bg-gray-950 text-white px-8 py-16 relative overflow-hidden">
+      <div className="absolute w-96 h-96 bg-blue-500/10 rounded-full blur-3xl top-20 left-20"></div>
+      <div className="max-w-3xl mx-auto relative z-10">
+        <Link
+          to="/blog"
+          className="text-blue-400 hover:text-blue-300 transition mb-8 flex items-center gap-2 animate-fadeUp delay-100"
+        >
+          ← Back to Blog
+        </Link>
+
+        <p className="text-gray-500 text-sm mb-4 animate-fadeUp delay-200">
+          {new Date(post.fields.publishedDate).toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+            hour: "2-digit",
+            minute: "2-digit",
+          })}
+        </p>
+
+        <h1 className="text-3xl md:text-4xl font-bold text-blue-400 mb-8 animate-fadeUp delay-300">
+          {post.fields.title}
+        </h1>
+
+        <p className="text-gray-300 leading-relaxed animate-fadeUp delay-400">
+          {post.fields.excerpt}
+        </p>
+        <div className="text-gray-300 leading-relaxed mt-8 animate-fadeUp delay-500">
+          {documentToReactComponents(post.fields.content)}
+        </div>
+      </div>
     </div>
   );
 }
