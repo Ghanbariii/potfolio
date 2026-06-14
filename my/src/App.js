@@ -25,11 +25,11 @@ function Home() {
       <img
         src="/avatar.svg"
         alt="Mohsen Ghanbari"
-        className="w-40 h-40 rounded-full mb-6 relative z-10 neon-border"
+        className="w-28 h-28 md:w-40 md:h-40 rounded-full mb-6 relative z-10 neon-border"
         style={{ background: "#1e3a5f" }}
       />
 
-      <h1 className="text-3xl md:text-5xl font-bold text-blue-400 relative z-10 tracking-wide animate-fadeUp delay-200">
+      <h1 className="text-2xl md:text-5xl font-bold text-blue-400 relative z-10 tracking-wide animate-fadeUp delay-200">
         Mohsen Ghanbari
       </h1>
       <h2 className="text-xl text-purple-400 mt-3 relative z-10 animate-fadeUp delay-300">
