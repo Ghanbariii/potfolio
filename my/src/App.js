@@ -235,6 +235,7 @@ function Projects() {
       description: "My personal portfolio built with React and Tailwind CSS.",
       tags: ["React", "Tailwind", "Git"],
       status: "Completed",
+      github: "https://github.com/Ghanbariii/Claude",
     },
     {
       title: "React Practice",
@@ -242,12 +243,14 @@ function Projects() {
         "Learning React fundamentals — routing, props, useState and more.",
       tags: ["React", "JavaScript"],
       status: "Completed",
+      github: "https://github.com/Ghanbariii",
     },
     {
       title: "Coming Soon...",
       description: "Next project is on the way. Stay tuned!",
       tags: [],
       status: "Planned",
+      github: null,
     },
   ];
 
@@ -287,15 +290,27 @@ function Projects() {
                 </span>
               </div>
               <p className="text-gray-400 mb-4">{project.description}</p>
-              <div className="flex gap-2">
-                {project.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="text-xs bg-blue-500/20 text-blue-300 px-3 py-1 rounded-full"
+              <div className="flex items-center justify-between">
+                <div className="flex gap-2">
+                  {project.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="text-xs bg-blue-500/20 text-blue-300 px-3 py-1 rounded-full"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+                {project.github && (
+                  <a
+                    href={project.github}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex items-center gap-2 text-blue-400 hover:text-blue-300 transition text-sm"
                   >
-                    {tag}
-                  </span>
-                ))}
+                    <FaGitAlt size={16} /> View Code
+                  </a>
+                )}
               </div>
             </div>
           ))}
