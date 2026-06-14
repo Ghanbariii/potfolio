@@ -182,3 +182,32 @@ code {
 .menu-animate {
   animation: menuSlide 0.3s ease forwards;
 }
+
+@keyframes textGlow {
+  0% {
+    text-shadow:
+      0 0 10px #3b82f6,
+      0 0 20px #3b82f6;
+  }
+  50% {
+    text-shadow:
+      0 0 15px #a855f7,
+      0 0 30px #a855f7;
+  }
+  100% {
+    text-shadow:
+      0 0 10px #3b82f6,
+      0 0 20px #3b82f6;
+  }
+}
+
+.neon-text {
+  animation:
+    fadeUp 0.8s ease 0.2s forwards,
+    textGlow 2s ease-in-out 1s infinite;
+  opacity: 0;
+}
+
+.nav-animate {
+  animation: fadeUp 0.6s ease forwards;
+}

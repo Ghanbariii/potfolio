@@ -306,13 +306,19 @@ function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   return (
     <BrowserRouter>
-      <nav className="bg-gray-950 border-b border-blue-500/30 flex justify-between items-center px-4 md:px-8 py-4 relative z-50">
-        <div className="flex items-center gap-4">
-          <h1 className="text-lg md:text-xl font-bold text-blue-400 tracking-widest uppercase">
-            MG
+      <nav className="bg-gradient-to-r from-gray-950 via-gray-900 to-gray-950 border-b border-blue-500/20 flex justify-between items-center px-4 md:px-8 py-4 z-50 sticky top-0">
+        {" "}
+        <div className="flex items-center gap-3 transition-all duration-300">
+          <img
+            src="/avatar.svg"
+            alt="MG"
+            className="w-8 h-8 rounded-full neon-border"
+            style={{ background: "#1e3a5f" }}
+          />
+          <h1 className="text-lg font-bold text-blue-400 tracking-wider neon-text ">
+            &lt;/MG&gt;
           </h1>
         </div>
-
         {/* همبرگری - فقط موبایل */}
         <button
           className="md:hidden text-gray-400 hover:text-blue-400 transition"
@@ -320,9 +326,8 @@ function App() {
         >
           {menuOpen ? <HiX size={24} /> : <HiMenu size={24} />}
         </button>
-
         {/* لینک‌ها - دسکتاپ */}
-        <div className="hidden md:flex gap-8 text-sm">
+        <div className="nav-animate hidden md:flex gap-8 text-sm">
           <Link
             to="/"
             className="flex items-center gap-2 text-gray-400 hover:text-blue-400 transition"
@@ -348,7 +353,6 @@ function App() {
             <HiMail size={16} /> Contact
           </Link>
         </div>
-
         {/* منو موبایل */}
         {menuOpen && (
           <div className="menu-animate absolute top-full left-0 right-0 bg-gray-950 border-b border-blue-500/30 flex flex-col gap-4 px-8 py-6 md:hidden">
