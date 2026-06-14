@@ -32,10 +32,10 @@ function Home() {
       <h1 className="text-2xl md:text-5xl font-bold text-blue-400 relative z-10 tracking-wide animate-fadeUp delay-200">
         Mohsen Ghanbari
       </h1>
-      <h2 className="text-xl text-purple-400 mt-3 relative z-10 animate-fadeUp delay-300">
+      <h2 className="text-base md:text-xl text-purple-400 mt-3 relative z-10 animate-fadeUp delay-300">
         Front-End Developer in Progress
       </h2>
-      <p className="text-gray-500 mt-4 text-center max-w-md relative z-10 animate-fadeUp delay-400">
+      <p className="text-sm md:text-base text-gray-500 mt-4 text-center max-w-md relative z-10 animate-fadeUp delay-400">
         Passionate about front-end development and always eager to learn new
         technologies. Currently mastering React and building real-world
         projects.
