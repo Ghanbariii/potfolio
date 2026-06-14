@@ -234,7 +234,7 @@ function Projects() {
       title: "Personal Portfolio",
       description: "My personal portfolio built with React and Tailwind CSS.",
       tags: ["React", "Tailwind", "Git"],
-      status: "In Progress",
+      status: "Completed",
     },
     {
       title: "React Practice",
