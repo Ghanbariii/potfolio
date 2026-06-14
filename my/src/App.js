@@ -134,15 +134,23 @@ function Contact({ isDark }) {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [status, setStatus] = useState("");
+  const [emailError, setEmailError] = useState("");
 
   const sendEmail = (e) => {
     e.preventDefault();
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setEmailError("Please enter a valid email address");
+      return;
+    }
+
     emailjs
       .send(
-        "YOUR_SERVICE_ID",
-        "YOUR_TEMPLATE_ID",
+        "service_g6v604n",
+        "template_cc43r5b",
         { from_name: name, from_email: email, message: message },
-        "YOUR_PUBLIC_KEY",
+        "P-uD4Z05derwEZjzn",
       )
       .then(() => {
         setStatus("success");
@@ -159,7 +167,6 @@ function Contact({ isDark }) {
     <div className="min-h-screen bg-gray-950 text-white px-8 py-16 relative overflow-hidden">
       <div className="absolute w-96 h-96 bg-blue-500/10 rounded-full blur-3xl top-20 right-20"></div>
       <div className="absolute w-72 h-72 bg-purple-500/10 rounded-full blur-3xl bottom-20 left-20"></div>
-
       <div className="max-w-2xl mx-auto relative z-10">
         <h1 className="text-3xl md:text-4xl font-bold text-blue-400 mb-2 animate-fadeUp delay-100">
           Contact Me
@@ -195,12 +202,14 @@ function Contact({ isDark }) {
           <h2 className="text-xl font-bold text-purple-400 mb-6">
             Send a Message
           </h2>
-          <form onSubmit={sendEmail} className="flex flex-col gap-4">
+          <form onSubmit={sendEmail} noValidate className="flex flex-col gap-4">
             <input
               type="text"
               placeholder="Your Name"
               value={name}
-              onChange={(e) => setName(e.target.value)}
+              onChange={(e) => {
+                setName(e.target.value);
+              }}
               required
               className="bg-gray-900 border border-blue-500/30 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-blue-400 transition"
             />
@@ -208,10 +217,21 @@ function Contact({ isDark }) {
               type="email"
               placeholder="Your Email"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => {
+                setEmail(e.target.value);
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(e.target.value)) {
+                  setEmailError("Please enter a valid email address");
+                } else {
+                  setEmailError("");
+                }
+              }}
               required
               className="bg-gray-900 border border-blue-500/30 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-blue-400 transition"
             />
+            {emailError && (
+              <p className="text-red-400 text-sm -mt-2">{emailError}</p>
+            )}
             <textarea
               placeholder="Your Message"
               value={message}
@@ -222,7 +242,8 @@ function Contact({ isDark }) {
             />
             <button
               type="submit"
-              className="bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition font-bold"
+              disabled={!!emailError || !email || !name || !message}
+              className="bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition font-bold disabled:opacity-50 disabled:cursor-not-allowed"
             >
               Send Message
             </button>
