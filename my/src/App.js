@@ -14,7 +14,6 @@ import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import { SiTailwindcss, SiNextdotjs, SiTypescript } from "react-icons/si";
 import { useState, useEffect } from "react";
 import emailjs from "@emailjs/browser";
-import AOS from "aos";
 import "aos/dist/aos.css";
 
 function Home() {
