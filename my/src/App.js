@@ -13,6 +13,7 @@ import { FaJs, FaReact, FaGitAlt } from "react-icons/fa";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import { SiTailwindcss, SiNextdotjs, SiTypescript } from "react-icons/si";
 import { useState } from "react";
+import emailjs from "@emailjs/browser";
 
 function Home() {
   return (
@@ -98,12 +99,38 @@ function Home() {
 }
 
 function Contact() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [status, setStatus] = useState("");
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    emailjs
+      .send(
+        "service_g6v604n",
+        "template_cc43r5b",
+        { from_name: name, from_email: email, message: message },
+        "P-uD4Z05derwEZjzn",
+      )
+      .then(() => {
+        setStatus("success");
+        setName("");
+        setEmail("");
+        setMessage("");
+      })
+      .catch(() => {
+        setStatus("error");
+      });
+  };
+
   return (
     <div className="min-h-screen bg-gray-950 text-white px-8 py-16 relative overflow-hidden">
       <div className="absolute w-96 h-96 bg-blue-500/10 rounded-full blur-3xl top-20 right-20"></div>
       <div className="absolute w-72 h-72 bg-purple-500/10 rounded-full blur-3xl bottom-20 left-20"></div>
 
-      <div className="max-w-3xl mx-auto relative z-10 flex flex-col items-center">
+      <div className="max-w-2xl mx-auto relative z-10">
         <h1 className="text-3xl md:text-4xl font-bold text-blue-400 mb-2 animate-fadeUp delay-100">
           Contact Me
         </h1>
@@ -111,9 +138,9 @@ function Contact() {
           Let's get in touch!
         </p>
 
-        <div className="flex flex-col sm:flex-row gap-6">
+        <div className="flex gap-6 mb-12">
           <a
-            href="https://linkedin.com/in/mohsenghanbarii"
+            href="https://linkedin.com/in/username"
             target="_blank"
             rel="noreferrer"
             className="flex items-center gap-2 bg-blue-600 px-6 py-3 rounded-lg hover:bg-blue-800 transition"
@@ -121,7 +148,7 @@ function Contact() {
             <FaLinkedin size={20} /> LinkedIn
           </a>
           <a
-            href="https://x.com/mohsenghanbarii"
+            href="https://x.com/username"
             target="_blank"
             rel="noreferrer"
             className="flex items-center gap-2 bg-gray-900 border border-gray-700 px-6 py-3 rounded-lg hover:bg-gray-800 transition"
@@ -129,6 +156,49 @@ function Contact() {
             <FaXTwitter size={20} /> X
           </a>
         </div>
+
+        <form onSubmit={sendEmail} className="flex flex-col gap-4">
+          <input
+            type="text"
+            placeholder="Your Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+            className="bg-blue-500/10 border border-blue-500/30 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-blue-400 transition"
+          />
+          <input
+            type="email"
+            placeholder="Your Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            className="bg-blue-500/10 border border-blue-500/30 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-blue-400 transition"
+          />
+          <textarea
+            placeholder="Your Message"
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            required
+            rows={5}
+            className="bg-blue-500/10 border border-blue-500/30 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-blue-400 transition resize-none"
+          />
+          <button
+            type="submit"
+            className="bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition font-bold"
+          >
+            Send Message
+          </button>
+          {status === "success" && (
+            <p className="text-green-400 text-center">
+              Message sent successfully! ✅
+            </p>
+          )}
+          {status === "error" && (
+            <p className="text-red-400 text-center">
+              Something went wrong. Try again! ❌
+            </p>
+          )}
+        </form>
       </div>
     </div>
   );
@@ -154,9 +224,6 @@ function About() {
           professional developer in Germany.
         </p>
 
-        <h2 className="text-2xl font-bold text-purple-400 mb-6 animate-fadeUp delay-400">
-          Skills
-        </h2>
         <h2 className="text-2xl font-bold text-purple-400 mb-6 animate-fadeUp delay-400">
           Skills
         </h2>
