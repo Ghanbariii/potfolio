@@ -599,6 +599,13 @@ function App() {
             >
               <HiMail size={16} /> Contact
             </Link>
+            <Link
+              to="/blog"
+              onClick={() => setMenuOpen(false)}
+              className="flex items-center gap-2 text-gray-400 hover:text-blue-400 transition"
+            >
+              <HiNewspaper size={16} /> Blog
+            </Link>
           </div>
         )}
       </nav>
