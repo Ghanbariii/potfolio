@@ -48,6 +48,10 @@ function Home() {
       <h1 className="text-2xl md:text-5xl font-bold text-blue-400 relative z-10 tracking-wide animate-fadeUp delay-200">
         Mohsen Ghanbari
       </h1>
+      <div className="flex items-center gap-2 mt-2 animate-fadeUp delay-300">
+        <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+        <span className="text-green-400 text-sm">Open to work</span>
+      </div>
       <h2 className="text-base md:text-xl text-purple-400 mt-3 relative z-10 animate-fadeUp delay-300">
         Front-End Developer in Progress
       </h2>
