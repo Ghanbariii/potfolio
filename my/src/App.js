@@ -10,7 +10,6 @@ import {
   HiNewspaper,
 } from "react-icons/hi";
 import { FaJs, FaReact, FaGitAlt } from "react-icons/fa";
-// import photo from "./avatar.svg";
 import {
   BrowserRouter,
   Routes,
@@ -34,7 +33,7 @@ function Home() {
       .catch(console.error);
   }, []);
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-950 text-white  relative overflow-hidden">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-950 text-white  relative overflow-hidden pt-24">
       <div className="absolute w-96 h-96 bg-blue-500/10 rounded-full blur-3xl top-20"></div>
       <div className="absolute w-72 h-72 bg-purple-500/10 rounded-full blur-3xl bottom-20"></div>
 
