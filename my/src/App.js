@@ -9,7 +9,7 @@ import {
   HiX,
   HiNewspaper,
 } from "react-icons/hi";
-import { FaJs, FaReact, FaGitAlt } from "react-icons/fa";
+import { FaJs, FaReact, FaGitAlt, FaExternalLinkAlt } from "react-icons/fa";
 import {
   BrowserRouter,
   Routes,
@@ -405,6 +405,15 @@ function About() {
 function Projects() {
   const projects = [
     {
+      title: "Sepid Academy",
+      description:
+        "A full website and student portal for a language & university-entrance-exam school in Shahroud, Iran. Custom WordPress theme and plugin with React islands, a role-based panel for students and teachers, and a fully right-to-left Persian interface.",
+      tags: ["WordPress", "React", "Tailwind", "PHP", "REST API"],
+      status: "In Progress",
+      github: null,
+      live: "https://sepeedacademy.ir",
+    },
+    {
       title: "Personal Portfolio",
       description: "My personal portfolio built with React and Tailwind CSS.",
       tags: ["React", "Tailwind", "Git"],
@@ -464,8 +473,14 @@ function Projects() {
                 </span>
               </div>
               <p className="text-gray-400 mb-4">{project.description}</p>
-              <div className="flex items-center justify-between">
-                <div className="flex gap-2">
+              {/*
+                 flex-wrap on both rows. Without it the tag list is a single
+                 non-wrapping line: on a 375px screen the last tag was clipped
+                 at the card edge and the "View Code" link was squeezed into
+                 two lines beside it.
+              */}
+              <div className="flex flex-wrap items-center justify-between gap-y-3">
+                <div className="flex flex-wrap gap-2">
                   {project.tags.map((tag) => (
                     <span
                       key={tag}
@@ -475,16 +490,28 @@ function Projects() {
                     </span>
                   ))}
                 </div>
-                {project.github && (
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="flex items-center gap-2 text-blue-400 hover:text-blue-300 transition text-sm"
-                  >
-                    <FaGitAlt size={16} /> View Code
-                  </a>
-                )}
+                <div className="flex items-center gap-4">
+                  {project.live && (
+                    <a
+                      href={project.live}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="flex items-center gap-2 text-blue-400 hover:text-blue-300 transition text-sm"
+                    >
+                      <FaExternalLinkAlt size={13} /> Visit Site
+                    </a>
+                  )}
+                  {project.github && (
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="flex items-center gap-2 text-blue-400 hover:text-blue-300 transition text-sm"
+                    >
+                      <FaGitAlt size={16} /> View Code
+                    </a>
+                  )}
+                </div>
               </div>
             </div>
           ))}
